@@ -1,9 +1,4 @@
-import * as React from 'react';
-
-export interface ILoadingSpinnerProps {
-}
-
-export function LoadingSpinner (props: ILoadingSpinnerProps) {
+export function LoadingSpinner() {
   return (
     <div>
       <div className="spinner">
