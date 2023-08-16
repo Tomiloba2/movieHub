@@ -5,11 +5,7 @@ import { Navbar } from '../components/Navbar';
 export function Root() {
     const [isExpanded, setIsExpanded] = React.useState(false)
     const handleExpanded = () => {
-        if(isExpanded){
-            setIsExpanded(false)
-        }else if (!isExpanded) {
-            setIsExpanded(true)
-        }
+        setIsExpanded(!isExpanded)
     }
     return (
         <div>

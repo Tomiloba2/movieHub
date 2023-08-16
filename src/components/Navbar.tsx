@@ -17,7 +17,7 @@ export function Navbar(props: INavbarProps) {
                         <Menu />
                     </div>
                 </div>
-                <div className={`nav-links  ${props.isExpanded ? `expanded` : ``}`}>
+                <div className={`nav-links  ${props.isExpanded ? `` : `expanded`}`}>
                     <ul>
                         <li>
                             <NavLink to='/'>
@@ -29,12 +29,7 @@ export function Navbar(props: INavbarProps) {
                                 Explore
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to='/'>
-                                Genres
-                            </NavLink>
-                        </li>
-                    </ul>
+                        </ul>
                 </div>
             </nav>
         </div>

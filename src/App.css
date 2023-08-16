@@ -106,8 +106,8 @@ input[type='search']::placeholder {
 }
 
 input[type='button'] {
-  width:50px;
-  height:50px;
+  width: 60px;
+  height: 60px;
   margin: 20px 0;
   padding: 15px;
   border: none;
@@ -151,7 +151,7 @@ input[type='button'] {
 }
 
 .carousel-item {
-  text-align:justify;
+  text-align: justify;
   flex-shrink: 0;
   width: 100%;
   display: flex;
@@ -162,13 +162,13 @@ input[type='button'] {
 
 .carousel-item img {
   border-radius: 10px;
-  width: 80%;
+  width: 100%;
   height: auto;
   object-fit: cover;
 }
 
 .carousel-item p {
-  width: 60%
+  width: 100%
 }
 
 .carousel-item button {
@@ -253,7 +253,7 @@ button:hover {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50% -50%);
+  transform: translate(-50%, -50%);
 }
 
 .loader {
@@ -295,6 +295,41 @@ button:hover {
 }
 
 /*search page*/
+.genres-css {
+  margin-top: 2rem;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.genres-css section {
+  position: relative;
+  width: 100%;
+  transition: all ease 0.5s;
+}
+
+.genres-css section:hover {
+  transform: scale(1);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.genres-css img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.genres-css p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: white;
+}
+
 .top-result article {
   margin-top: 10px;
 }
@@ -398,6 +433,11 @@ button:hover {
     display: inline-block;
   }
 
+  .expanded {
+    display: block;
+  }
+
+
   .carousel-item {
     flex-direction: row;
   }
@@ -421,6 +461,10 @@ button:hover {
     grid-template-columns: auto auto;
   }
 
+  .genres-css section {
+    width: 33.33%;
+  }
+
   .top-result img {
     width: 25%;
   }
@@ -439,5 +483,7 @@ button:hover {
     object-fit: cover;
     height: 70vh;
   }
-
+.genres-css section{
+  width:20%
+}  
 }

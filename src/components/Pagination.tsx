@@ -78,7 +78,7 @@ export function Pagination(props: IPaginationProps) {
                     {currentRecords.map((item, id) => {
                         return (
                             <div key={id}>
-                                <img src={item.backdrop_path!==null?`${imgUrl}${item.backdrop_path}`:notFound} alt={item.title} />
+                                <img loading='lazy' src={item.backdrop_path!==null?`${imgUrl}${item.backdrop_path}`:notFound} alt={item.title} />
                                 <section>
                                     <p>{item.title}</p>
                                     <br />

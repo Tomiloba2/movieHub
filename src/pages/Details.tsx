@@ -33,7 +33,7 @@ export function Details() {
     <div className='details'>
       <section >
         <article>
-          <img src={data.backdrop_path===null?`${notFound}`:`${imgUrl}${data.backdrop_path}`} alt={data.title} className='details-img' />
+          <img loading='lazy' src={data.backdrop_path===null?`${notFound}`:`${imgUrl}${data.backdrop_path}`} alt={data.title} className='details-img' />
           <div className="title">
             <h4>{data.original_title}</h4>
             <div>

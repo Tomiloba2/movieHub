@@ -1,9 +1,11 @@
 import { useSearch } from '../context/SearchContext';
 import { LoadingSpinner } from '../components/Loading';
 import { Error } from '../components/Error';
-import { imgUrl } from '../libs/Async';
+import fetchData, { apiKey, imgUrl } from '../libs/Async';
 import { Link } from 'react-router-dom';
 import { SearchBar } from '../components/SearchBar';
+import notFound from '../assets/not-found.png';
+import { genres } from '../libs/genres';
 
 export function SearchPage() {
     const val = useSearch()
@@ -15,20 +17,35 @@ export function SearchPage() {
     }
     const data = val?.data
     console.log(data);
-
     return (
         <>
             <div>
                 <SearchBar />
             </div>
-            <div className='search'>
+            {data?.length===0?(
+                <div className="genres-css">
+                    {genres.map((item)=>{
+                        return(
+                            <section  key={item.id}>
+                                <Link to={`/genres/${item.id}`}>
+                                <img src={item.img} alt={item.name} />
+                                <p>
+                                    {item.name}
+                                </p>
+                                </Link>
+                            </section>
+                        )
+                    })}
+                </div>
+            ):(
+                <div className='search'>
                 <section className='top-result'>
                     <h3>Top Results</h3>
                     <article>
                         {data?.map((item) => {
                             return (
                                 <div key={item.id}>
-                                    <img src={`${imgUrl}${item.backdrop_path}`} alt={item.original_title} />
+                                    <img loading='lazy' src={item.backdrop_path!==null?`${imgUrl}${item.backdrop_path}`:notFound} alt={item.original_title} />
                                     <p>
                                         <Link to={`/details/${item.id}`} style={{
                                             color:`white`,
@@ -45,6 +62,8 @@ export function SearchPage() {
                     </article>
                 </section>
             </div>
+            )}
+            
         </>
     );
 }

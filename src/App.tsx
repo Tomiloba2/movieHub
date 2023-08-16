@@ -5,6 +5,7 @@ import { Home } from './pages/Home'
 import { SearchPage } from './pages/Search'
 import { Details } from './pages/Details'
 import { SearchProvider } from './context/SearchContext'
+import { Genres } from './pages/Genre'
 
 function App() {
   const router = createBrowserRouter([
@@ -13,6 +14,7 @@ function App() {
         { path: '/', element: <Home /> },
         { path: '/search', element: <SearchPage /> },
         { path: '/details/:id', element: <Details /> },
+        { path: '/genres/:id', element: <Genres /> },
       ]
     }
   ])
