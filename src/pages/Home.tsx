@@ -1,27 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
 import { Carousel } from '../components/Carousel';
 import { Pagination } from '../components/Pagination';
-import fetchData, { apiKey } from '../libs/Async';
+import useQueriedData from '../libs/queries'
 
 export function Home() {
-    const trending = useQuery({
-        queryKey: ["trending"],
-        queryFn: () => fetchData(`trending/movie/day?api_key=${apiKey}`)
-    })
-    const popular = useQuery({
-        queryKey: ['popular'],
-        queryFn: () => fetchData(`/movie/popular?api_key=${apiKey} `)
-    })
-    const topRated = useQuery({
-        queryKey: ['top-rated'],
-        queryFn: () => fetchData(`/movie/top_rated?api_key=${apiKey} `)
-    })
-    const upComing = useQuery({
-        queryKey: ['upcoming'],
-        queryFn: () => fetchData(`/movie/upcoming?api_key=${apiKey} `)
-    })
-    console.log(popular.data);
-
+    const {
+        popular, now_playing, trending, upComing,topRated
+    } = useQueriedData()
     return (
         <div className='home'>
             <section>
@@ -51,6 +35,15 @@ export function Home() {
                         isLoading={topRated.isLoading}
                         isError={topRated.isError} />
                 </div>
+                <div>
+                    <Pagination
+                        title='Now Showing'
+                        list={now_playing.data}
+                        error={now_playing.error}
+                        isLoading={now_playing.isLoading}
+                        isError={now_playing.isError} />
+                </div>
+
                 <div>
                     <Pagination
                         title='Up coming'

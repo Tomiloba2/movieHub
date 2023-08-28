@@ -159,7 +159,6 @@ input[type='button'] {
   gap: 10px;
 }
 
-
 .carousel-item img {
   border-radius: 10px;
   width: 100%;
@@ -217,8 +216,10 @@ input[type='button'] {
 }
 
 .current-records img {
+  min-width: 250px;
   width: 100%;
   height: auto;
+  min-height: 200px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -316,6 +317,8 @@ button:hover {
 }
 
 .genres-css img {
+  min-width: 100%;
+  min-height: 200px;
   width: 100%;
   height: auto;
   border-radius: 20px;
@@ -483,7 +486,8 @@ button:hover {
     object-fit: cover;
     height: 70vh;
   }
-.genres-css section{
-  width:20%
-}  
+
+  .genres-css section {
+    width: 20%
+  }
 }

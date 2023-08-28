@@ -3,7 +3,7 @@ export function SearchBar() {
     const val = useSearch()
 
     return (
-        <div style={{
+        <form onSubmit={val?.handleSearch} style={{
             display: `flex`,
             justifyContent: `space-between`
         }}>
@@ -13,12 +13,12 @@ export function SearchBar() {
                 value={val?.query}
                 onChange={val?.handleQuery}
             />
-            <input type="button" value="search" style={{
+            {/*<input type="button" value="search" style={{
                 borderRadius: `50%`,
                 backgroundColor: ` #f14510`,
                 border: `none`,
                 color: `white`
-            }} onClick={val?.handleSearch} />
-        </div>
+            }} onClick={val?.handleSearch} />*/}
+        </form>
     );
 }

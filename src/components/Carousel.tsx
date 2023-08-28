@@ -60,7 +60,7 @@ export function Carousel(props: ICarouselProps) {
                     {props.list.map((item, id) => {
                         return (
                             <div className="carousel-item" key={id}>
-                                <img src={`${imgUrl}${item.backdrop_path}`} alt="" loading='lazy' />
+                                <img src={`${imgUrl}${item.backdrop_path}`} alt=""  />
                                 <p>
                                     <h4>{item.original_title}</h4>
                                     <br />

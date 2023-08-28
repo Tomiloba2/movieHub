@@ -1,39 +1,31 @@
 import { Pagination } from '../components/Pagination';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query'
-import fetchData, { apiKey, detailFetchData, imgUrl } from '../libs/Async';
+import { imgUrl } from '../libs/Async';
 import { LoadingSpinner } from '../components/Loading';
 import { Error } from '../components/Error';
 import { Idetails } from '../types/Interfaces';
 import notFound from '../assets/not-found.png'
-//import { useEffect } from 'react';
-
+import useQueriedData from '../libs/queries';
 
 export function Details() {
   const { id } = useParams()
-  const detailMovie = useQuery({
-    queryKey: ['details',id],
-    queryFn: () => detailFetchData(`movie/${id}?api_key=${apiKey}`)
-  })
-  const recommendedMovie = useQuery({
-    queryKey: ['recommendations',id],
-    queryFn: () => fetchData(`movie/${id}/recommendations?api_key=${apiKey}`),
-    enabled:!!id
-  })
+  const {
+    detailMovie, recommendedMovie, similarMovie
+  } = useQueriedData(id)
+
   if (detailMovie.isLoading) {
     return <LoadingSpinner />
   }
   if (detailMovie.isError) {
     return <Error message={detailMovie.error} />
   }
-  console.log(recommendedMovie.data);
   
   const data: Idetails = detailMovie.data
   return (
     <div className='details'>
       <section >
         <article>
-          <img loading='lazy' src={data.backdrop_path===null?`${notFound}`:`${imgUrl}${data.backdrop_path}`} alt={data.title} className='details-img' />
+          <img loading='lazy' src={data.backdrop_path === null ? `${notFound}` : `${imgUrl}${data.backdrop_path}`} alt={data.title} className='details-img' />
           <div className="title">
             <h4>{data.original_title}</h4>
             <div>
@@ -70,15 +62,38 @@ export function Details() {
             </p>
           </div>
         </article>
+        <article className='details-videos'>
+          {/* {data.videos?.results.map((item) => {
+            return (
+              <div key={item.id}>
+                {item.name}
+                <a href={`https://www.youtube.com/watch?v=${item.key}`}>youtube</a>
+              </div>
+            )
+          })} */}
+        </article>
       </section>
       <section>
-        <Pagination
-          title='Recommended'
-          list={recommendedMovie.data}
-          error={recommendedMovie.error}
-          isLoading={recommendedMovie.isLoading}
-          isError={recommendedMovie.isError} />
+        {recommendedMovie.data?.length !== 0 ? (
+          <Pagination
+            title='Recommended'
+            list={recommendedMovie.data}
+            error={recommendedMovie.error}
+            isLoading={recommendedMovie.isLoading}
+            isError={recommendedMovie.isError} />
+        ) : (null)}
       </section>
+      <section>
+        {similarMovie.data?.length !== 0 ? (
+          <Pagination
+            title='Similar'
+            list={similarMovie.data}
+            error={similarMovie.error}
+            isLoading={similarMovie.isLoading}
+            isError={similarMovie.isError} />
+        ) : (null)}
+      </section>
+
     </div>
   );
 }
