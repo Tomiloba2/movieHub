@@ -33,12 +33,12 @@ export const genres = [
       {
         "id": 18,
         "name": "Drama",
-        'img':'https://image.tmdb.org/t/p/original//2vFuG6bWGyQUzYS9d69E5l85nIz.jpg'
+        'img':'https://image.tmdb.org/t/p/original//jVFeUR259RcW57mzhqJogV3QnLa.jpg'
       },
       {
         "id": 10751,
         "name": "Family",
-        'img':'https://image.tmdb.org/t/p/original//2vFuG6bWGyQUzYS9d69E5l85nIz.jpg'
+        'img':'https://image.tmdb.org/t/p/original//k1KrbaCMACQiq7EA0Yhw3bdzMv7.jpg'
       },
       {
         "id": 14,
@@ -48,7 +48,7 @@ export const genres = [
       {
         "id": 36,
         "name": "History",
-        'img':'https://image.tmdb.org/t/p/original//2vFuG6bWGyQUzYS9d69E5l85nIz.jpg'
+        'img':'https://image.tmdb.org/t/p/original//f1AQhx6ZfGhPZFTVKgxG91PhEYc.jpg'
       },
       {
         "id": 27,
@@ -58,7 +58,7 @@ export const genres = [
       {
         "id": 10402,
         "name": "Music",
-        'img':'https://image.tmdb.org/t/p/original//2vFuG6bWGyQUzYS9d69E5l85nIz.jpg'
+        'img':'https://image.tmdb.org/t/p/original//8MDDAi8VnWKJdMmsxuJ1YL1wc21.jpg'
       },
       {
         "id": 9648,
@@ -68,7 +68,7 @@ export const genres = [
       {
         "id": 10749,
         "name": "Romance",
-        'img':'https://image.tmdb.org/t/p/original//2vFuG6bWGyQUzYS9d69E5l85nIz.jpg'
+        'img':'https://image.tmdb.org/t/p/original//jkKVLzLWjSvTnc84VzeljhSy6j8.jpg'
       },
       {
         "id": 878,
@@ -93,7 +93,7 @@ export const genres = [
       {
         "id": 37,
         "name": "Western",
-        'img':'https://image.tmdb.org/t/p/original//2vFuG6bWGyQUzYS9d69E5l85nIz.jpg'
+        'img':'https://image.tmdb.org/t/p/original//9NDiFyiMYcQHFGYZIKtL6w3JoAl.jpg'
       }
     ]
   

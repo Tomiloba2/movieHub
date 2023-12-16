@@ -1,5 +1,6 @@
 import { Menu } from '@mui/icons-material';
-import { NavLink } from "react-router-dom"
+import { NavLink, /* useNavigate */ } from "react-router-dom"
+
 
 export interface INavbarProps {
     handleExpanded: () => void;
@@ -7,7 +8,6 @@ export interface INavbarProps {
 }
 
 export function Navbar(props: INavbarProps) {
-
     return (
         <div>
             <nav className="navigation">
@@ -29,9 +29,9 @@ export function Navbar(props: INavbarProps) {
                                 Explore
                             </NavLink>
                         </li>
-                        </ul>
+                    </ul>
                 </div>
-            </nav>
-        </div>
+            </nav >
+        </div >
     );
 }

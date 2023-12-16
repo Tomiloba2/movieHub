@@ -1,28 +1,46 @@
-import { useSearch } from '../context/SearchContext';
+import * as React from 'react'
 import { LoadingSpinner } from '../components/Loading';
 import { Error } from '../components/Error';
-import { imgUrl } from '../libs/Async';
+import { apiKey, imgUrl, instance } from '../libs/movies/Async';
 import { Link } from 'react-router-dom';
-import { SearchBar } from '../components/SearchBar';
 import notFound from '../assets/not-found.png';
-import { genres } from '../libs/genres';
+import { genres } from '../libs/movies/genres';
+import { useQuery } from '@tanstack/react-query';
+import { Itrending } from '../types/Interfaces';
 
 export function SearchPage() {
-    const val = useSearch()
-    if (val?.loading) {
-        return <LoadingSpinner />
+    const [query, setQuery] = React.useState('')
+    const handleQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value)
     }
-    if (val?.err.isError) {
-        return <Error message={val.err.error} />
+    const { data, refetch, isError, isLoading, error } = useQuery({
+        queryFn: async () => {
+            const res = await instance.get(`search/movie?api_key=${apiKey}&query=${query}`)
+            return res.data?.results
+        },
+        queryKey: ['searchMovies'],
+        enabled: false
+    })
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        refetch()
     }
-    const data = val?.data
-    console.log(data);
     return (
         <>
             <div>
-                <SearchBar />
+                <form onSubmit={handleSearch} style={{
+                    display: `flex`,
+                    justifyContent: `space-between`
+                }}>
+                    <input
+                        type="search"
+                        placeholder='Search for your favourite movies'
+                        value={query}
+                        onChange={handleQuery}
+                    />
+                </form>
             </div>
-            {data?.length === 0 ? (
+            {!data ? (
                 <div className="genres-css">
                     {genres.map((item) => {
                         return (
@@ -42,10 +60,14 @@ export function SearchPage() {
                     <section className='top-result'>
                         <h3>Top Results</h3>
                         <article>
-                            {data?.map((item) => {
+                            {isLoading && <LoadingSpinner/>}
+                            {data?.map((item: Itrending) => {
                                 return (
                                     <div key={item.id}>
-                                        <img loading='lazy' src={item.backdrop_path !== null ? `${imgUrl}${item.backdrop_path}` : notFound} alt={item.original_title} />
+                                        <img
+                                            width={'150px'}
+                                            height={'200px'}
+                                            loading='lazy' src={item.backdrop_path !== null ? `${imgUrl}${item.backdrop_path}` : notFound} alt={item.original_title} />
                                         <p>
                                             <Link to={`/details/${item.id}`} style={{
                                                 color: `white`,
@@ -59,6 +81,7 @@ export function SearchPage() {
                                     </div>
                                 )
                             })}
+                            {isError && <Error message={error}/>}
                         </article>
                     </section>
                 </div>

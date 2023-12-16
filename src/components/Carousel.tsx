@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from './Button';
 import { Itrending } from '../types/Interfaces';
-import { imgUrl } from '../libs/Async';
+import { imgUrl } from '../libs/movies/Async';
 import { LoadingSpinner } from './Loading';
 import { Error } from './Error';
 import { ArrowLeft, ArrowRight } from '@mui/icons-material'
@@ -17,12 +17,12 @@ export function Carousel(props: ICarouselProps) {
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const handleNext = () => {
         setCurrentIndex(
-            (currentIndex + 1) % props.list.length
+            (currentIndex + 1) % props.list?.length
         )
     }
-    const handlePrev = () => {
+    const handlePrev =() => {
         setCurrentIndex(
-            (currentIndex - 1 + props.list.length) % props.list.length
+            (currentIndex - 1 + props.list?.length) % props.list?.length
         )
     }
     //enabling keyboard and touch navigation
@@ -33,6 +33,13 @@ export function Carousel(props: ICarouselProps) {
             handlePrev()
         }
     }
+    //creating autoplay
+    React.useEffect(() => {
+        const play = setInterval(handleNext, 15000)
+        return () => {
+            clearInterval(play)
+        }
+    }, [currentIndex])
     const currentTransform = -currentIndex * 100
     /*handling loading and error state*/
     if (props.isLoading) {
@@ -57,17 +64,17 @@ export function Carousel(props: ICarouselProps) {
                     style={{
                         transform: `translateX(${currentTransform}%)`
                     }}>
-                    {props.list.map((item, id) => {
+                    {props.list!==undefined && props.list.map((item, id) => {
                         return (
                             <div className="carousel-item" key={id}>
-                                <img src={`${imgUrl}${item.backdrop_path}`} alt=""  />
-                                <p>
-                                    <h4>{item.original_title}</h4>
+                                <img src={`${imgUrl}${item.backdrop_path}`} alt="" />
+                                <aside>
+                                    <h2>{item.original_title}</h2>
                                     <br />
                                     {item.overview.slice(0, 150)}...
                                     <br /><br />
                                     <Button id={item.id} />
-                                </p>
+                                </aside>
                             </div>
                         )
                     })}

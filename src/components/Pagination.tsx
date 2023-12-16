@@ -3,8 +3,8 @@ import { Button } from './Button';
 import { Itrending } from '../types/Interfaces';
 import { LoadingSpinner } from './Loading';
 import { Error } from './Error';
-import { imgUrl } from '../libs/Async';
-import {ArrowLeft,ArrowRight} from '@mui/icons-material'
+import { imgUrl } from '../libs/movies/Async';
+import { ArrowLeft, ArrowRight } from '@mui/icons-material'
 import notFound from '../assets/not-found.png'
 
 export interface IPaginationProps {
@@ -50,18 +50,20 @@ export function Pagination(props: IPaginationProps) {
     return (
         <div>
             <section className="pagination">
-                <h3>{props.title}</h3>
+                <h3>{props.title}</h3><br /><br />
                 <article>
                     <ul>
                         <li>
                             <a href="#" onClick={previousPage}>
-                              <ArrowLeft/>
+                                <ArrowLeft />
                             </a>
                         </li>
                         {pageNumber.map((item) => {
                             return (
                                 <li key={item}>
-                                    <a href="#" onClick={() => setCurrentPage(item)}>
+                                    <a href="#"
+                                        onClick={() => setCurrentPage(item)}
+                                        className={currentPage === item ? `active` : ``}>
                                         {item}
                                     </a>
                                 </li>
@@ -69,7 +71,7 @@ export function Pagination(props: IPaginationProps) {
                         })}
                         <li>
                             <a href="#" onClick={nextPage}>
-                              <ArrowRight/>
+                                <ArrowRight />
                             </a>
                         </li>
                     </ul>
@@ -78,9 +80,12 @@ export function Pagination(props: IPaginationProps) {
                     {currentRecords.map((item, id) => {
                         return (
                             <div key={id}>
-                                <img loading='lazy' src={item.backdrop_path!==null?`${imgUrl}${item.backdrop_path}`:notFound} alt={item.title} />
+                                <img
+                                    loading='lazy'
+                                    src={item.backdrop_path !== null ? `${imgUrl}${item.backdrop_path}` : notFound}
+                                    alt={item.title} />
                                 <section>
-                                    <p>{item.title}</p>
+                                    <h4>{item.title}</h4>
                                     <br />
                                     <Button id={item.id} />
                                 </section>

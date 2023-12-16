@@ -1,10 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './App.css'
+import './App.scss'
 import { Root } from './pages/Root'
 import { Home } from './pages/Home'
 import { SearchPage } from './pages/Search'
 import { Details } from './pages/Details'
-import { SearchProvider } from './context/SearchContext'
 import { Genres } from './pages/Genre'
 
 function App() {
@@ -14,16 +13,14 @@ function App() {
         { path: '/', element: <Home /> },
         { path: '/search', element: <SearchPage /> },
         { path: '/details/:id', element: <Details /> },
-        { path: '/genres/:id', element: <Genres /> },
+        { path: '/genres/:id', element: <Genres /> }
       ]
     }
   ])
   return (
     <>
       <main className='container'>
-        <SearchProvider>
-          <RouterProvider router={router} />
-        </SearchProvider>
+        <RouterProvider router={router} />
       </main>
     </>
   )
